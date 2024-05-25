@@ -2,17 +2,12 @@
 agp = "8.4.1"
 kotlin = "1.9.24"
 coreKtx = "1.13.1"
-kotlinxSerializationJson = "1.6.0"
-ktorClientAuth = "2.3.7"
-ktorClientContentNegotiation = "2.3.7"
-ktorSerializationKotlinxJson = "2.3.7"
+kotlinxSerializationJson = "1.6.3"
 lifecycleRuntimeKtx = "2.8.0"
 activityCompose = "1.9.0"
 composeBom = "2024.05.00"
 coilCompose = "2.6.0"
-ktorClientAndroid = "2.3.7"
-ktorVersion = "2.3.7"
-pagingRuntime = "3.3.0"
+ktorVersion = "2.3.11"
 hiltNavigationCompose = "1.2.0"
 androidxNavigation = "2.7.7"
 hilt = "2.51.1"
@@ -29,18 +24,16 @@ androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigation" }
-androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingRuntime" }
-androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRuntime" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
-ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroid" }
-ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktorClientAuth" }
-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorVersion" }
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktorVersion" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorVersion" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorVersion" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
