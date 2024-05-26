@@ -1,6 +1,7 @@
 package com.darkwhite.yassirmoviesapp.data.model
 
 import androidx.compose.runtime.Immutable
+import com.darkwhite.yassirmoviesapp.utils.Constants
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,5 +36,8 @@ data class Movie(
   val voteAverage: Double,
   @SerialName("vote_count")
   val voteCount: Int
-)
+) {
+  val posterUrl: String
+    get() = "${Constants.TMDB_BASE_IMAGE_URL}$posterPath"
+}
 

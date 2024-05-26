@@ -39,8 +39,6 @@ import coil.compose.AsyncImage
 import com.darkwhite.yassirmoviesapp.data.model.Movie
 import com.darkwhite.yassirmoviesapp.ui.component.largeDp
 import com.darkwhite.yassirmoviesapp.ui.component.mediumDp
-import com.darkwhite.yassirmoviesapp.utils.Constants.TMDB_BASE_IMAGE_URL
-import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun MoviesScreen(
@@ -88,7 +86,7 @@ fun MoviesContent(
       verticalArrangement = Arrangement.spacedBy(largeDp),
     ) {
       itemsIndexed(
-        items = uiState.movies.toImmutableList(),
+        items = uiState.movies,
         key = { _, item: Movie -> item.id }
       ) { index: Int, movie: Movie ->
         currentIndex = index
@@ -135,7 +133,7 @@ private fun MovieUi(
         .fillMaxWidth()
         .height(200.dp)
         .clip(RoundedCornerShape(largeDp)),
-      model = "$TMDB_BASE_IMAGE_URL${movie.posterPath}",
+      model = movie.posterUrl,
       contentDescription = null
     )
     Text(
