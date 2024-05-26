@@ -3,8 +3,17 @@ package com.darkwhite.yassirmoviesapp.utils
 object Constants {
   // Query
   const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
+  const val TMDB_BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
   const val TMDB_API_KEY = "fd257349d621283bb379f7af33eb8016"
-  const val SEARCH_PAGE_SIZE = 20
+  
+  // Navigation routes
+  const val HOME_ROUTE = "home_route"
+  const val MOVIE_ROUTE = "movie_route"
+  const val FAVORITE_ROUTE = "favorite_route"
+  const val SETTINGS_ROUTE = "settings_route"
+  const val MOVIE_DETAIL_ROUTE = "movie_detail_route"
+  const val MOVIE_DETAIL_ARG = "movie_detail_id"
+  const val MOVIE_DETAIL_ROUTE_WITH_ARG = "$MOVIE_DETAIL_ROUTE/{${MOVIE_DETAIL_ARG}}"
   
   // Common
   const val EMPTY_STRING = ""

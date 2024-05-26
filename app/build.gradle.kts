@@ -53,6 +53,8 @@ dependencies {
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
+  implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+  implementation(libs.androidx.lifecycle.viewmodel.compose)
   // Compose
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.ui)
@@ -74,6 +76,8 @@ dependencies {
   implementation(libs.kotlinx.serialization.json)
   // Coil (image loading library)
   implementation(libs.coil.compose)
+  // Immutable collection
+  implementation(libs.kotlinx.collections.immutable)
   // Debug preview
   debugImplementation(libs.androidx.ui.tooling)
 }
