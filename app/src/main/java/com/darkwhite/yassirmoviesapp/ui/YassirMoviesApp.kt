@@ -1,5 +1,6 @@
 package com.darkwhite.yassirmoviesapp.ui
 
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -32,7 +33,9 @@ fun YassirMoviesApp(
     NavHostWithFadeThough(
       navController = appState.navController,
       startDestination = Constants.HOME_ROUTE,
-      modifier = Modifier.padding(paddingValues)
+      modifier = Modifier
+        .padding(paddingValues)
+        .consumeWindowInsets(paddingValues)
     ) {
       
       homeNestedGraph(appState = appState)

@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -64,7 +66,7 @@ fun MoviesContent(
   val lazyState = rememberLazyGridState()
   var currentIndex by remember { mutableIntStateOf(0) }
   val loadMore by remember(currentIndex, uiState.movies) {
-    val threshold = 8
+    val threshold = 4
     derivedStateOf {
       uiState.movies.isNotEmpty() && !uiState.isLoading && !uiState.isInitialLoading
           && currentIndex + threshold >= uiState.movies.size
@@ -78,10 +80,10 @@ fun MoviesContent(
   
   Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
     LazyVerticalGrid(
-      modifier = modifier,
+      modifier = Modifier.padding(paddingValues),
       state = lazyState,
       columns = GridCells.Fixed(2),
-      contentPadding = paddingValues,
+      contentPadding = PaddingValues(largeDp),
       horizontalArrangement = Arrangement.spacedBy(largeDp),
       verticalArrangement = Arrangement.spacedBy(largeDp),
     ) {
@@ -125,7 +127,9 @@ private fun MovieUi(
   onClick: (movieId: Int) -> Unit
 ) {
   Column(
-    modifier = Modifier.clickable { onClick(movie.id) },
+    modifier = Modifier
+      .clip(RoundedCornerShape(largeDp))
+      .clickable { onClick(movie.id) },
     verticalArrangement = Arrangement.spacedBy(mediumDp)
   ) {
     AsyncImage(
@@ -134,9 +138,11 @@ private fun MovieUi(
         .height(200.dp)
         .clip(RoundedCornerShape(largeDp)),
       model = movie.posterUrl,
-      contentDescription = null
+      contentDescription = null,
+      contentScale = ContentScale.FillBounds
     )
     Text(
+      modifier = Modifier.padding(horizontal = mediumDp),
       text = movie.title,
       style = MaterialTheme.typography.bodySmall,
       overflow = TextOverflow.Ellipsis,
@@ -145,6 +151,7 @@ private fun MovieUi(
   }
 }
 
+@Preview
 @Composable
 private fun LoadingIndicator(modifier: Modifier = Modifier) {
   Box(
@@ -153,8 +160,8 @@ private fun LoadingIndicator(modifier: Modifier = Modifier) {
   ) {
     CircularProgressIndicator(
       modifier = Modifier
-        .padding(largeDp)
-        .size(56.dp)
+        .padding(mediumDp)
+        .size(32.dp)
     )
   }
 }

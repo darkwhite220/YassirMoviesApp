@@ -33,7 +33,6 @@ class MoviesViewModel @Inject constructor(
     when (event) {
       MoviesUiEvent.OnFetchMore -> fetchMovies()
       MoviesUiEvent.OnErrorMessageShown -> resetErrorMessage()
-      is MoviesUiEvent.OnSearchQueryChange -> updateSearchQuery(event.newValue)
     }
   }
   
@@ -65,10 +64,6 @@ class MoviesViewModel @Inject constructor(
     )
   }
   
-  private fun updateSearchQuery(newValue: String) {
-  
-  }
-  
   private fun resetErrorMessage() {
     uiState = uiState.copy(errorMessage = EMPTY_STRING)
   }
@@ -76,7 +71,6 @@ class MoviesViewModel @Inject constructor(
 }
 
 sealed interface MoviesUiEvent {
-  data class OnSearchQueryChange(val newValue: String) : MoviesUiEvent
   data object OnFetchMore : MoviesUiEvent
   data object OnErrorMessageShown : MoviesUiEvent
 }
@@ -87,6 +81,5 @@ data class MoviesUiState(
   val isLoading: Boolean = false,
   val pageIndex: Int = 0,
   val movies: ImmutableList<Movie> = persistentListOf(),
-  val searchQuery: String = EMPTY_STRING,
   val errorMessage: String = EMPTY_STRING,
 )
