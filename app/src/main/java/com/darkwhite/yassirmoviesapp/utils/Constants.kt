@@ -4,6 +4,7 @@ object Constants {
   // Query
   const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
   const val TMDB_BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
+  const val TMDB_BASE_IMAGE_BACKDROP_URL = "https://image.tmdb.org/t/p/w780/"
   const val TMDB_API_KEY = "c9856d0cb57c3f14bf75bdc6c063b8f3"
   
   // Navigation routes

@@ -12,4 +12,8 @@ object AppIcon {
   
   val SettingsFilledIcon = R.drawable.ic_settings_filled
   val SettingsOutlinedIcon = R.drawable.ic_settings_outline
+  
+  val BackArrowIcon = R.drawable.ic_arrow_left
+  val PlayArrowIcon = R.drawable.ic_play_arrow
+  val DownloadIcon = R.drawable.ic_download
 }

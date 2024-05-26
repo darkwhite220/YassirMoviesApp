@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.darkwhite.yassirmoviesapp.data.model.ApiResponse
 import com.darkwhite.yassirmoviesapp.data.model.Movie
 import com.darkwhite.yassirmoviesapp.data.repository.DataRepository
 import com.darkwhite.yassirmoviesapp.utils.Constants.EMPTY_STRING
@@ -41,18 +40,15 @@ class MoviesViewModel @Inject constructor(
       uiState = uiState.copy(isLoading = true)
     }
     
-    val response = dataRepository.fetchMovies(uiState.pageIndex)
     var errorMessage = EMPTY_STRING
     val tempList = mutableListOf<Movie>()
     
-    when (response) {
-      is ApiResponse.Failure -> {
-        errorMessage = response.exception.message ?: "Fetch movies request failed"
+    dataRepository.fetchMovies(uiState.pageIndex)
+      .onSuccess { moviesList ->
+        tempList.addAll(moviesList)
+      }.onFailure { exception ->
+        errorMessage = exception.message ?: "Fetch movies request failed"
       }
-      is ApiResponse.Success -> {
-        tempList.addAll(response.data)
-      }
-    }
     
     // Update
     uiState = uiState.copy(
@@ -79,7 +75,7 @@ sealed interface MoviesUiEvent {
 data class MoviesUiState(
   val isInitialLoading: Boolean = true,
   val isLoading: Boolean = false,
-  val pageIndex: Int = 0,
+  val pageIndex: Int = 1,
   val movies: ImmutableList<Movie> = persistentListOf(),
   val errorMessage: String = EMPTY_STRING,
 )

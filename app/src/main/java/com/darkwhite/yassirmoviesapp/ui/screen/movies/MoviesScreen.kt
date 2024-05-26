@@ -3,27 +3,22 @@ package com.darkwhite.yassirmoviesapp.ui.screen.movies
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -31,19 +26,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.BrushPainter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
 import com.darkwhite.yassirmoviesapp.data.model.Movie
+import com.darkwhite.yassirmoviesapp.ui.component.BodySmallText
+import com.darkwhite.yassirmoviesapp.ui.component.LoadingIndicator
+import com.darkwhite.yassirmoviesapp.ui.component.MyAsyncImage
 import com.darkwhite.yassirmoviesapp.ui.component.largeDp
 import com.darkwhite.yassirmoviesapp.ui.component.mediumDp
 import com.darkwhite.yassirmoviesapp.ui.theme.YassirMoviesAppTheme
@@ -138,43 +129,18 @@ private fun MovieUi(
       .clickable { onClick(movie.id) },
     verticalArrangement = Arrangement.spacedBy(mediumDp)
   ) {
-    AsyncImage(
+    MyAsyncImage(
       modifier = Modifier
         .fillMaxWidth()
         .height(200.dp)
         .clip(RoundedCornerShape(largeDp)),
-      model = movie.posterUrl,
-      placeholder = BrushPainter(
-        Brush.linearGradient(
-          listOf(
-            Color(color = 0xFFFFFFFF),
-            Color(color = 0xFFDDDDDD),
-          )
-        )
-      ),
-      contentDescription = null,
-      contentScale = ContentScale.FillBounds
+      imageUrl = movie.posterUrl,
     )
-    Text(
+    // Title
+    BodySmallText(
       modifier = Modifier.padding(horizontal = mediumDp),
       text = movie.title,
-      style = MaterialTheme.typography.bodySmall,
-      overflow = TextOverflow.Ellipsis,
       maxLines = 1,
-    )
-  }
-}
-
-@Composable
-private fun LoadingIndicator(modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier.fillMaxWidth(),
-    contentAlignment = Alignment.Center
-  ) {
-    CircularProgressIndicator(
-      modifier = Modifier
-        .padding(mediumDp)
-        .size(32.dp)
     )
   }
 }

@@ -1,6 +1,7 @@
 package com.darkwhite.yassirmoviesapp.data.model
 
 import androidx.compose.runtime.Immutable
+import com.darkwhite.yassirmoviesapp.utils.Constants.TMDB_BASE_IMAGE_BACKDROP_URL
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +12,7 @@ data class MovieDetail(
   @SerialName("backdrop_path")
   val backdropPath: String?,
   @SerialName("belongs_to_collection")
-  val belongsToCollection: String?,
+  val belongsToCollection: BelongsToCollection?,
   val budget: Int,
   val genres: List<Genre>,
   val homepage: String,
@@ -47,6 +48,22 @@ data class MovieDetail(
   @SerialName("vote_count")
   val voteCount: Int
 ) {
+  val backdropPathUrl: String
+    get() = "$TMDB_BASE_IMAGE_BACKDROP_URL$backdropPath"
+  
+  val genresString: String
+    get() = genres.joinToString(" • ") { it.name }
+  
+  @Serializable
+  data class BelongsToCollection(
+    val id: Int,
+    val name: String,
+    @SerialName("poster_path")
+    val posterPath: String?,
+    @SerialName("backdrop_path")
+    val backdropPath: String?
+  )
+  
   @Serializable
   data class Genre(
     val id: Int,
