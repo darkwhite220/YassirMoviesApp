@@ -1,5 +1,6 @@
 package com.darkwhite.yassirmoviesapp.ui.screen.movies
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,6 +34,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.BrushPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,6 +46,8 @@ import coil.compose.AsyncImage
 import com.darkwhite.yassirmoviesapp.data.model.Movie
 import com.darkwhite.yassirmoviesapp.ui.component.largeDp
 import com.darkwhite.yassirmoviesapp.ui.component.mediumDp
+import com.darkwhite.yassirmoviesapp.ui.theme.YassirMoviesAppTheme
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun MoviesScreen(
@@ -54,7 +61,6 @@ fun MoviesScreen(
   )
 }
 
-@Preview
 @Composable
 fun MoviesContent(
   modifier: Modifier = Modifier,
@@ -80,7 +86,7 @@ fun MoviesContent(
   
   Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
     LazyVerticalGrid(
-      modifier = Modifier.padding(paddingValues),
+      modifier = modifier.padding(paddingValues),
       state = lazyState,
       columns = GridCells.Fixed(2),
       contentPadding = PaddingValues(largeDp),
@@ -138,6 +144,14 @@ private fun MovieUi(
         .height(200.dp)
         .clip(RoundedCornerShape(largeDp)),
       model = movie.posterUrl,
+      placeholder = BrushPainter(
+        Brush.linearGradient(
+          listOf(
+            Color(color = 0xFFFFFFFF),
+            Color(color = 0xFFDDDDDD),
+          )
+        )
+      ),
       contentDescription = null,
       contentScale = ContentScale.FillBounds
     )
@@ -151,7 +165,6 @@ private fun MovieUi(
   }
 }
 
-@Preview
 @Composable
 private fun LoadingIndicator(modifier: Modifier = Modifier) {
   Box(
@@ -163,5 +176,37 @@ private fun LoadingIndicator(modifier: Modifier = Modifier) {
         .padding(mediumDp)
         .size(32.dp)
     )
+  }
+}
+
+@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun MoviesContentPreview(modifier: Modifier = Modifier) {
+  val uiState = MoviesUiState(
+    movies = List(10) {
+      Movie(it, "", "Movie $it")
+    }.toImmutableList()
+  )
+  YassirMoviesAppTheme {
+    Surface {
+      MoviesContent(
+        uiState = uiState,
+        onUiEvent = {},
+        onMovieClick = {},
+      )
+    }
+  }
+}
+
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true)
+@Composable
+private fun LoadingIndicatorPreview(modifier: Modifier = Modifier) {
+  YassirMoviesAppTheme {
+    Surface {
+      LoadingIndicator()
+    }
   }
 }
