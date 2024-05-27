@@ -41,7 +41,7 @@ class MoviesViewModel @Inject constructor(
     }
     
     var errorMessage = EMPTY_STRING
-    val tempList = mutableListOf<Movie>()
+    val tempList = mutableSetOf<Movie>().apply { addAll(uiState.movies) }
     
     dataRepository.fetchMovies(uiState.pageIndex)
       .onSuccess { moviesList ->
@@ -55,7 +55,7 @@ class MoviesViewModel @Inject constructor(
       isInitialLoading = false,
       isLoading = false,
       pageIndex = uiState.pageIndex + 1,
-      movies = uiState.movies.plus(tempList.toList()).toImmutableList(),
+      movies = tempList.toList().toImmutableList(),
       errorMessage = errorMessage,
     )
   }
