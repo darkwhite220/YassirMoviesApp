@@ -86,7 +86,7 @@ fun MoviesContent(
     ) {
       itemsIndexed(
         items = uiState.movies,
-        key = { _, item: Movie -> item.id }
+        key = { index, _ -> index }
       ) { index: Int, movie: Movie ->
         currentIndex = index
         MovieUi(
