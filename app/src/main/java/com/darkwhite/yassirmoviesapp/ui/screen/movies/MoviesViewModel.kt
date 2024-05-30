@@ -36,7 +36,7 @@ class MoviesViewModel @Inject constructor(
   }
   
   private fun fetchMovies() = viewModelScope.launch {
-    if (uiState.pageIndex > 0) {
+    if (uiState.pageIndex > 1) {
       uiState = uiState.copy(isLoading = true)
     }
     
